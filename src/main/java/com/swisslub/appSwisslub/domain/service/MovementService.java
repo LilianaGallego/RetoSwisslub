@@ -73,4 +73,13 @@ public class MovementService implements IMovementUseCase {
         json.put("Mensaje", "El movimiento no ha sido encontrado");
         return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
     }
+
+    @Override
+    public Optional<MovementDto> getMovementById(Long id) {
+        Optional<MovementDto> movementBD = iMovementRepository.getMovementById(id);
+        if (movementBD.isEmpty()){
+            return Optional.empty();
+        }
+        return movementBD;
+    }
 }

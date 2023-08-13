@@ -12,4 +12,5 @@ public interface IMovementUseCase {
     List<MovementDto> getAll();
     Optional<MovementDto> update(MovementDto modifyMovementDto, Long id);
     ResponseEntity<?> delete(Long id);
+    Optional<MovementDto> getMovementById(Long id);
 }
