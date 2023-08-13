@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -21,6 +22,8 @@ public class MovementEntity {
     private LocalDate creationDate;
     private LocalDate deliveryDate;
     private String status;
+    @OneToMany(mappedBy = "movementEntity", cascade = CascadeType.ALL)
+    private List<MovementDetailEntity> movementDetailList;
 
 
 }
