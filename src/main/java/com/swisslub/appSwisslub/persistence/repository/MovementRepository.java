@@ -32,7 +32,8 @@ public class MovementRepository implements IMovementRepository {
 
     @Override
     public Optional<MovementDto> getMovementById(Long id) {
-        return Optional.empty();
+        return iMovementCrudRepository.findById(id)
+                .map(iMovementMapper::toMovementDto);
     }
 
     @Override

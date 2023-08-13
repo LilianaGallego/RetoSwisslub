@@ -5,10 +5,13 @@ public enum StatusEnum {
     T("Transito"),
     E("Entregado");
 
-    private String name;
-
+    private final String name;
     StatusEnum(String name) {
         this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

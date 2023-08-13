@@ -26,4 +26,10 @@ public class MovementController {
     public ResponseEntity<List<MovementDto>> getAll() {
         return ResponseEntity.ok(movementUseCase.getAll());
     }
+
+    @PatchMapping(path = "/update/{id}")
+    public ResponseEntity<MovementDto> update(@RequestBody MovementDto movementDtoUpdate, @PathVariable Long id) {
+        return ResponseEntity.of(movementUseCase.update(movementDtoUpdate, id));
+    }
+
 }
