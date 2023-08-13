@@ -51,4 +51,10 @@ public class MovementDetailRepository implements IMovementDetailRepository {
     public void delete(Long id) {
         iMovementDetailCrudRepository.deleteById(id);
     }
+
+    @Override
+    public List<MovementDetailDto> getByMovementId(Long id) {
+        return iMovementDetailMapper.toMovementDetailsDto(iMovementDetailCrudRepository
+                .findByMovementEntityId(id));
+    }
 }

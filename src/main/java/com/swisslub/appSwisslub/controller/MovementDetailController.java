@@ -45,4 +45,9 @@ public class MovementDetailController {
     public ResponseEntity<List<MovementDetailDto>> getByStatus(@PathVariable StatusEnum status) {
         return ResponseEntity.ok(movementDetailUseCase.getMovementDetailsByStatus(status));
     }
+
+    @GetMapping(path = "/getByMovementId/{id}")
+    public ResponseEntity<List<MovementDetailDto>> getByMovementId(@PathVariable Long id) {
+        return ResponseEntity.ok(movementDetailUseCase.getMovementDetailsByMovementId(id));
+    }
 }

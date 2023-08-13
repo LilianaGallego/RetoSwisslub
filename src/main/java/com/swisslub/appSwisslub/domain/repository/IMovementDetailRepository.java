@@ -13,4 +13,5 @@ public interface IMovementDetailRepository {
     List<MovementDetailDto> getByStatus(StatusEnum status);
     MovementDetailDto update(MovementDetailDto modifyMovementDetailDto);
     void delete(Long id);
+    List<MovementDetailDto> getByMovementId(Long id);
 }

@@ -15,4 +15,5 @@ public interface IMovementDetailUseCase {
     ResponseEntity<?> delete(Long id);
     Optional<MovementDetailDto> getMovementDetailById(Long id);
     List<MovementDetailDto> getMovementDetailsByStatus(StatusEnum status);
+    List<MovementDetailDto> getMovementDetailsByMovementId(Long id);
 }

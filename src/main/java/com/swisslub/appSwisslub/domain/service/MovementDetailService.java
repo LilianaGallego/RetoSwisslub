@@ -70,4 +70,9 @@ public class MovementDetailService implements IMovementDetailUseCase {
     public List<MovementDetailDto> getMovementDetailsByStatus(StatusEnum status) {
         return iMovementDetailRepository.getByStatus(status);
     }
+
+    @Override
+    public List<MovementDetailDto> getMovementDetailsByMovementId(Long id) {
+        return iMovementDetailRepository.getByMovementId(id);
+    }
 }

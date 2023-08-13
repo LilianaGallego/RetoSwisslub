@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface IMovementDetailCrudRepository extends JpaRepository<MovementDetailEntity, Long> {
     List<MovementDetailEntity> findByMovementEntityStatus(String status);
+    List<MovementDetailEntity> findByMovementEntityId(Long id);
 }
