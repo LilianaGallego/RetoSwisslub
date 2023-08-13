@@ -5,8 +5,11 @@ import com.swisslub.appSwisslub.domain.dto.ResponseMessageDto;
 import com.swisslub.appSwisslub.domain.repository.IMovementDetailRepository;
 import com.swisslub.appSwisslub.domain.usecase.IMovementDetailUseCase;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,5 +45,18 @@ public class MovementDetailService implements IMovementDetailUseCase {
             movementDetailBD.get().setQuantitySent(modifyMovementDetailDto.getQuantitySent());
         }
         return Optional.of(iMovementDetailRepository.update(movementDetailBD.get()));
+    }
+
+    @Override
+    public ResponseEntity<?> delete(Long id) {
+        Optional<MovementDetailDto> movementDetailBD = iMovementDetailRepository.getMovementDetailById(id);
+        HashMap<String, Object> json = new HashMap<>();
+        if(movementDetailBD.isPresent()){
+            iMovementDetailRepository.delete(id);
+            json.put("Mensaje", "Detalle del movimiento eliminado correctamente");
+            return new ResponseEntity<>(json, HttpStatus.OK);
+        }
+        json.put("Mensaje", "El detalle del movimiento no ha sido encontrado");
+        return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
     }
 }

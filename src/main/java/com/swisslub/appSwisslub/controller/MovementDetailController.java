@@ -29,4 +29,9 @@ public class MovementDetailController {
     public ResponseEntity<MovementDetailDto> update(@RequestBody MovementDetailDto movementDetailDtoUpdate, @PathVariable Long id) {
         return ResponseEntity.of(movementDetailUseCase.update(movementDetailDtoUpdate, id));
     }
+
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return movementDetailUseCase.delete(id);
+    }
 }
