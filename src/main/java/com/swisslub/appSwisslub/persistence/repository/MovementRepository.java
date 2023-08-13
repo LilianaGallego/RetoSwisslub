@@ -27,7 +27,7 @@ public class MovementRepository implements IMovementRepository {
 
     @Override
     public List<MovementDto> getAll() {
-        return null;
+        return iMovementMapper.toMovementsDto(iMovementCrudRepository.findAll());
     }
 
     @Override

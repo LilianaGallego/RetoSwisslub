@@ -8,6 +8,8 @@ import com.swisslub.appSwisslub.enums.StatusEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class MovementService implements IMovementUseCase {
@@ -17,5 +19,10 @@ public class MovementService implements IMovementUseCase {
         movementDto.setStatus(StatusEnum.P);
         iMovementRepository.save(movementDto);
         return new ResponseMessageDto("Movimiento registrado correctamente");
+    }
+
+    @Override
+    public List<MovementDto> getAll() {
+        return iMovementRepository.getAll();
     }
 }
