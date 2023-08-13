@@ -36,7 +36,8 @@ public class MovementDetailRepository implements IMovementDetailRepository {
 
     @Override
     public List<MovementDetailDto> getByStatus(StatusEnum status) {
-        return null;
+        return iMovementDetailMapper.toMovementDetailsDto(iMovementDetailCrudRepository
+                .findByMovementEntityStatus(status.toString()));
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.swisslub.appSwisslub.controller;
 import com.swisslub.appSwisslub.domain.dto.MovementDetailDto;
 import com.swisslub.appSwisslub.domain.dto.ResponseMessageDto;
 import com.swisslub.appSwisslub.domain.usecase.IMovementDetailUseCase;
+import com.swisslub.appSwisslub.enums.StatusEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,5 +39,10 @@ public class MovementDetailController {
     @GetMapping(path = "/getById/{id}")
     public ResponseEntity<MovementDetailDto> getById(@PathVariable Long id) {
         return ResponseEntity.of(movementDetailUseCase.getMovementDetailById(id));
+    }
+
+    @GetMapping(path = "/getByStatus/{status}")
+    public ResponseEntity<List<MovementDetailDto>> getByStatus(@PathVariable StatusEnum status) {
+        return ResponseEntity.ok(movementDetailUseCase.getMovementDetailsByStatus(status));
     }
 }

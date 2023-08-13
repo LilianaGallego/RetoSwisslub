@@ -4,6 +4,7 @@ import com.swisslub.appSwisslub.domain.dto.MovementDetailDto;
 import com.swisslub.appSwisslub.domain.dto.ResponseMessageDto;
 import com.swisslub.appSwisslub.domain.repository.IMovementDetailRepository;
 import com.swisslub.appSwisslub.domain.usecase.IMovementDetailUseCase;
+import com.swisslub.appSwisslub.enums.StatusEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -63,5 +64,10 @@ public class MovementDetailService implements IMovementDetailUseCase {
     @Override
     public Optional<MovementDetailDto> getMovementDetailById(Long id) {
         return iMovementDetailRepository.getMovementDetailById(id);
+    }
+
+    @Override
+    public List<MovementDetailDto> getMovementDetailsByStatus(StatusEnum status) {
+        return iMovementDetailRepository.getByStatus(status);
     }
 }
