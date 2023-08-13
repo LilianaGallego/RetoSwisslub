@@ -30,7 +30,8 @@ public class MovementDetailRepository implements IMovementDetailRepository {
 
     @Override
     public Optional<MovementDetailDto> getMovementDetailById(Long id) {
-        return Optional.empty();
+        return iMovementDetailCrudRepository.findById(id)
+                .map(iMovementDetailMapper::toMovementDetailDto);
     }
 
     @Override
@@ -40,7 +41,9 @@ public class MovementDetailRepository implements IMovementDetailRepository {
 
     @Override
     public MovementDetailDto update(MovementDetailDto modifyMovementDetailDto) {
-        return null;
+        return iMovementDetailMapper.toMovementDetailDto((iMovementDetailCrudRepository
+                .save(iMovementDetailMapper
+                        .toMovementDetailEntity(modifyMovementDetailDto))));
     }
 
     @Override

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -23,5 +24,23 @@ public class MovementDetailService implements IMovementDetailUseCase {
     @Override
     public List<MovementDetailDto> getAll() {
         return iMovementDetailRepository.getAll();
+    }
+
+    @Override
+    public Optional<MovementDetailDto> update(MovementDetailDto modifyMovementDetailDto, Long id) {
+        Optional<MovementDetailDto> movementDetailBD = iMovementDetailRepository.getMovementDetailById(id);
+        if(movementDetailBD.isEmpty()){
+            return Optional.empty();
+        }
+        if(modifyMovementDetailDto.getMovementId() != null){
+            movementDetailBD.get().setMovementId(modifyMovementDetailDto.getMovementId());
+        }
+        if(modifyMovementDetailDto.getItemCode() != null){
+            movementDetailBD.get().setItemCode(modifyMovementDetailDto.getItemCode());
+        }
+        if(modifyMovementDetailDto.getQuantitySent() != 0){
+            movementDetailBD.get().setQuantitySent(modifyMovementDetailDto.getQuantitySent());
+        }
+        return Optional.of(iMovementDetailRepository.update(movementDetailBD.get()));
     }
 }
