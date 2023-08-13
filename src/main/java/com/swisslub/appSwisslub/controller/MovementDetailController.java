@@ -6,10 +6,9 @@ import com.swisslub.appSwisslub.domain.usecase.IMovementDetailUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,4 +20,10 @@ public class MovementDetailController {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(movementDetailUseCase.save(movementDetailDto));
     }
+
+    @GetMapping(path = "/getAll")
+    public ResponseEntity<List<MovementDetailDto>> getAll() {
+        return ResponseEntity.ok(movementDetailUseCase.getAll());
+    }
+
 }

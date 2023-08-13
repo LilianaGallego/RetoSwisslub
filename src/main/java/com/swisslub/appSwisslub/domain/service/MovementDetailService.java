@@ -7,6 +7,8 @@ import com.swisslub.appSwisslub.domain.usecase.IMovementDetailUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class MovementDetailService implements IMovementDetailUseCase {
@@ -16,5 +18,10 @@ public class MovementDetailService implements IMovementDetailUseCase {
     public ResponseMessageDto save(MovementDetailDto movementDetailDto) {
         iMovementDetailRepository.save(movementDetailDto);
         return new ResponseMessageDto("Detalle del movimiento registrado correctamente");
+    }
+
+    @Override
+    public List<MovementDetailDto> getAll() {
+        return iMovementDetailRepository.getAll();
     }
 }
