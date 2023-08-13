@@ -4,6 +4,7 @@ import com.swisslub.appSwisslub.domain.dto.MovementDto;
 import com.swisslub.appSwisslub.domain.repository.IMovementRepository;
 import com.swisslub.appSwisslub.enums.StatusEnum;
 import com.swisslub.appSwisslub.persistence.crud.IMovementCrudRepository;
+import com.swisslub.appSwisslub.persistence.entity.MovementEntity;
 import com.swisslub.appSwisslub.persistence.mapper.IMovementMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -19,10 +20,12 @@ public class MovementRepository implements IMovementRepository {
 
     @Override
     public MovementDto save(MovementDto movementDto) {
+        MovementEntity movementEntity= iMovementMapper
+                .toMovementEntity(movementDto);
+        movementEntity.setStatus(StatusEnum.P.name());
         return iMovementMapper
                 .toMovementDto(iMovementCrudRepository
-                        .save(iMovementMapper
-                                .toMovementEntity(movementDto)));
+                        .save(movementEntity));
     }
 
     @Override
@@ -37,8 +40,16 @@ public class MovementRepository implements IMovementRepository {
     }
 
     @Override
-    public Optional<MovementDto> getMovementByStatus(StatusEnum status) {
-        return Optional.empty();
+    public List<MovementDto> getMovementByStatus(StatusEnum status) {
+        return iMovementMapper.toMovementsDto(iMovementCrudRepository.findByStatus(status.name()));
+    }
+
+    @Override
+    public MovementDto update(MovementDto modifyMovementDto) {
+        return iMovementMapper
+                .toMovementDto(iMovementCrudRepository
+                        .save(iMovementMapper
+                                .toMovementEntity(modifyMovementDto)));
     }
 
     @Override

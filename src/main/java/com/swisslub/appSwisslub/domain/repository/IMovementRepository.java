@@ -10,6 +10,7 @@ public interface IMovementRepository {
     MovementDto save(MovementDto movementDto);
     List<MovementDto> getAll();
     Optional<MovementDto> getMovementById(Long id);
-    Optional<MovementDto> getMovementByStatus(StatusEnum status);
+    List<MovementDto> getMovementByStatus(StatusEnum status);
+    MovementDto update(MovementDto modifyMovementDto);
     void delete(Long id);
 }

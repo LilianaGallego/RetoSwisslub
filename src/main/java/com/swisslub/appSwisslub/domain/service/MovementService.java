@@ -20,7 +20,7 @@ public class MovementService implements IMovementUseCase {
     private  final IMovementRepository iMovementRepository;
     @Override
     public ResponseMessageDto save(MovementDto movementDto) {
-        movementDto.setStatus(StatusEnum.P);
+
         iMovementRepository.save(movementDto);
         return new ResponseMessageDto("Movimiento registrado correctamente");
     }
@@ -58,7 +58,7 @@ public class MovementService implements IMovementUseCase {
             movementBD.get().setStatus(modifyMovementDto.getStatus());
         }
 
-        return Optional.of(iMovementRepository.save(movementBD.get()));
+        return Optional.of(iMovementRepository.update(movementBD.get()));
     }
 
     @Override
@@ -81,5 +81,10 @@ public class MovementService implements IMovementUseCase {
             return Optional.empty();
         }
         return movementBD;
+    }
+
+    @Override
+    public List<MovementDto> getMovementByStatus(StatusEnum status) {
+        return iMovementRepository.getMovementByStatus(status);
     }
 }

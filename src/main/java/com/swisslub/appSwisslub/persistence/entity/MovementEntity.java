@@ -1,6 +1,5 @@
 package com.swisslub.appSwisslub.persistence.entity;
 
-import com.swisslub.appSwisslub.enums.StatusEnum;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +20,7 @@ public class MovementEntity {
     private String wineryDestinationCode;
     private LocalDate creationDate;
     private LocalDate deliveryDate;
-    private StatusEnum status;
+    private String status;
 
 
 }

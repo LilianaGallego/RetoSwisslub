@@ -3,7 +3,6 @@ package com.swisslub.appSwisslub.persistence.mapper;
 import com.swisslub.appSwisslub.domain.dto.MovementDto;
 import com.swisslub.appSwisslub.persistence.entity.MovementEntity;
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
