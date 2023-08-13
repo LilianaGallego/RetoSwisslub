@@ -59,4 +59,9 @@ public class MovementDetailService implements IMovementDetailUseCase {
         json.put("Mensaje", "El detalle del movimiento no ha sido encontrado");
         return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
     }
+
+    @Override
+    public Optional<MovementDetailDto> getMovementDetailById(Long id) {
+        return iMovementDetailRepository.getMovementDetailById(id);
+    }
 }

@@ -34,4 +34,9 @@ public class MovementDetailController {
     public ResponseEntity<?> delete(@PathVariable Long id) {
         return movementDetailUseCase.delete(id);
     }
+
+    @GetMapping(path = "/getById/{id}")
+    public ResponseEntity<MovementDetailDto> getById(@PathVariable Long id) {
+        return ResponseEntity.of(movementDetailUseCase.getMovementDetailById(id));
+    }
 }

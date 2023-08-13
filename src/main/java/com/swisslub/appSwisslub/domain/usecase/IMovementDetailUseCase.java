@@ -12,4 +12,5 @@ public interface IMovementDetailUseCase {
     List<MovementDetailDto> getAll();
     Optional<MovementDetailDto> update(MovementDetailDto modifyMovementDetailDto, Long id);
     ResponseEntity<?> delete(Long id);
+    Optional<MovementDetailDto> getMovementDetailById(Long id);
 }
