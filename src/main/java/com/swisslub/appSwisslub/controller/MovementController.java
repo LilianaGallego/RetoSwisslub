@@ -32,4 +32,9 @@ public class MovementController {
         return ResponseEntity.of(movementUseCase.update(movementDtoUpdate, id));
     }
 
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) {
+        return movementUseCase.delete(id);
+    }
+
 }

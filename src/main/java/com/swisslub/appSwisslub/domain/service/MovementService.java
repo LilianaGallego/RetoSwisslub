@@ -6,8 +6,11 @@ import com.swisslub.appSwisslub.domain.repository.IMovementRepository;
 import com.swisslub.appSwisslub.domain.usecase.IMovementUseCase;
 import com.swisslub.appSwisslub.enums.StatusEnum;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,5 +59,18 @@ public class MovementService implements IMovementUseCase {
         }
 
         return Optional.of(iMovementRepository.save(movementBD.get()));
+    }
+
+    @Override
+    public ResponseEntity<?> delete(Long id) {
+        Optional<MovementDto> movementBD = iMovementRepository.getMovementById(id);
+        HashMap<String, Object> json = new HashMap<>();
+        if(movementBD.isPresent()){
+            iMovementRepository.delete(id);
+            json.put("Mensaje", "Movimiento eliminado correctamente");
+            return new ResponseEntity<>(json, HttpStatus.OK);
+        }
+        json.put("Mensaje", "El movimiento no ha sido encontrado");
+        return new ResponseEntity<>(json, HttpStatus.NOT_FOUND);
     }
 }

@@ -43,6 +43,6 @@ public class MovementRepository implements IMovementRepository {
 
     @Override
     public void delete(Long id) {
-
+        iMovementCrudRepository.deleteById(id);
     }
 }
