@@ -1,10 +1,15 @@
 package com.swisslub.appSwisslub.domain.service;
 
+import com.swisslub.appSwisslub.domain.dto.MovementDetailDto;
 import com.swisslub.appSwisslub.domain.dto.MovementDto;
+import com.swisslub.appSwisslub.domain.dto.MovementWithDetailsDto;
 import com.swisslub.appSwisslub.domain.dto.ResponseMessageDto;
+import com.swisslub.appSwisslub.domain.repository.IMovementDetailRepository;
 import com.swisslub.appSwisslub.domain.repository.IMovementRepository;
 import com.swisslub.appSwisslub.domain.usecase.IMovementUseCase;
 import com.swisslub.appSwisslub.enums.StatusEnum;
+import com.swisslub.appSwisslub.persistence.mapper.IMovementDetailMapper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +22,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 public class MovementService implements IMovementUseCase {
-    private  final IMovementRepository iMovementRepository;
+    private final IMovementRepository iMovementRepository;
+    private final IMovementDetailRepository iMovementDetailRepository;
+    private final IMovementDetailMapper iMovementDetailMapper;      
+
     @Override
     public ResponseMessageDto save(MovementDto movementDto) {
 
@@ -86,5 +94,17 @@ public class MovementService implements IMovementUseCase {
     @Override
     public List<MovementDto> getMovementByStatus(StatusEnum status) {
         return iMovementRepository.getMovementByStatus(status);
+    }
+
+    @Transactional
+    public ResponseMessageDto saveWithDetails(MovementWithDetailsDto movementWithDetailsDto) {
+        MovementWithDetailsDto saveMovement = iMovementRepository.saveWithDetails(movementWithDetailsDto);
+        List<MovementDetailDto> movementDetailDtoList = movementWithDetailsDto.getMovementDetailDtoList();
+        for (MovementDetailDto detailDto : movementDetailDtoList) {
+            detailDto.setMovementId(saveMovement.getId());
+            iMovementDetailMapper
+                    .toMovementDetailEntity(iMovementDetailRepository.save(detailDto));
+        }
+        return new ResponseMessageDto("Movimiento con lista de detalles registrado correctamente");
     }
 }

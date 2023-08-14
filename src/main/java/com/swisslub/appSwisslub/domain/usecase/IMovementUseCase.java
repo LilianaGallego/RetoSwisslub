@@ -1,6 +1,7 @@
 package com.swisslub.appSwisslub.domain.usecase;
 
 import com.swisslub.appSwisslub.domain.dto.MovementDto;
+import com.swisslub.appSwisslub.domain.dto.MovementWithDetailsDto;
 import com.swisslub.appSwisslub.domain.dto.ResponseMessageDto;
 import com.swisslub.appSwisslub.enums.StatusEnum;
 import org.springframework.http.ResponseEntity;
@@ -15,4 +16,5 @@ public interface IMovementUseCase {
     ResponseEntity<?> delete(Long id);
     Optional<MovementDto> getMovementById(Long id);
     List<MovementDto> getMovementByStatus(StatusEnum status);
+    ResponseMessageDto saveWithDetails(MovementWithDetailsDto movementWithDetailsDto);
 }

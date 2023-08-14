@@ -22,7 +22,7 @@ public class MovementEntity {
     private LocalDate creationDate;
     private LocalDate deliveryDate;
     private String status;
-    @OneToMany(mappedBy = "movementEntity", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "movementEntity")
     private List<MovementDetailEntity> movementDetailList;
 
 

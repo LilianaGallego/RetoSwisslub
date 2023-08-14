@@ -1,6 +1,7 @@
 package com.swisslub.appSwisslub.controller;
 
 import com.swisslub.appSwisslub.domain.dto.MovementDto;
+import com.swisslub.appSwisslub.domain.dto.MovementWithDetailsDto;
 import com.swisslub.appSwisslub.domain.dto.ResponseMessageDto;
 import com.swisslub.appSwisslub.domain.usecase.IMovementUseCase;
 import com.swisslub.appSwisslub.enums.StatusEnum;
@@ -48,4 +49,9 @@ public class MovementController {
         return ResponseEntity.ok(movementUseCase.getMovementByStatus(status));
     }
 
+    @PostMapping(path = "/registerWithDetails")
+    public ResponseEntity<ResponseMessageDto> saveWithDetails(@RequestBody MovementWithDetailsDto movementWithDetailsDto) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(movementUseCase.saveWithDetails(movementWithDetailsDto));
+    }
 }

@@ -1,6 +1,7 @@
 package com.swisslub.appSwisslub.persistence.repository;
 
 import com.swisslub.appSwisslub.domain.dto.MovementDto;
+import com.swisslub.appSwisslub.domain.dto.MovementWithDetailsDto;
 import com.swisslub.appSwisslub.domain.repository.IMovementRepository;
 import com.swisslub.appSwisslub.enums.StatusEnum;
 import com.swisslub.appSwisslub.persistence.crud.IMovementCrudRepository;
@@ -55,5 +56,19 @@ public class MovementRepository implements IMovementRepository {
     @Override
     public void delete(Long id) {
         iMovementCrudRepository.deleteById(id);
+    }
+
+    @Override
+    public MovementWithDetailsDto saveWithDetails(MovementWithDetailsDto movementWithDetailsDto) {
+
+
+        MovementEntity movementEntity= iMovementMapper
+                .toMovementEntityWithDetails(movementWithDetailsDto);
+        movementEntity.setStatus(StatusEnum.P.name());
+
+        MovementEntity saveMovement = iMovementCrudRepository
+                        .save(movementEntity);
+        return iMovementMapper
+                .toMovementWithDetailsDto(saveMovement);
     }
 }
