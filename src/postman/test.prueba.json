@@ -1,0 +1,297 @@
+{
+  "apiInfo": {
+    "name": "APP Swisslub",
+    "version": "1.0",
+    "description": "Descripción de la APP Swisslub "
+  },
+  "endpoints": [
+    {
+      "name": "Crear movimiento",
+      "url": "http://localhost:8080/movements/registerMovement",
+      "method": "POST",
+      "description": "Endpoint para crear un nuevo movimiento"
+    },
+    {
+      "name": "Crear movimiento con lista de detalles",
+      "url": "http://localhost:8080/movements/registerWithDetails",
+      "method": "POST",
+      "description": "Endpoint para crear un nuevo movimiento y recibe una lista de detalles"
+    },
+    {
+      "name": "Obtener todos los movimiento",
+      "url": "http://localhost:8080/movements/getAll",
+      "method": "GET",
+      "description": "Endpoint para obtener la lista de movimientos"
+    },
+    {
+      "name": "Actualizar movimiento",
+      "url": "http://localhost:8080/movements/update/{id}",
+      "method": "PATCH",
+      "description": "Endpoint para actualizar un movimiento recibe como parametro en la url el id del movimiento a actualizar"
+    },
+    {
+      "name": "Eliminar movimiento",
+      "url": "http://localhost:8080/movements/delete/{id}",
+      "method": "DELETE",
+      "description": "Endpoint para eliminar un movimiento recibe como parametro en la url el id del movimiento a eliminar"
+    },
+    {
+      "name": "Buscar movimiento por id",
+      "url": "http://localhost:8080/movements/getById/{id}",
+      "method": "GET",
+      "description": "Endpoint para buscar un movimiento recibe como parametro en la url el id del movimiento a buscar"
+    },
+    {
+      "name": "Buscar movimientos por estado",
+      "url": "http://localhost:8080/movements/getByStatus/{status}",
+      "method": "GET",
+      "description": "Endpoint para buscar los movimientos recibe como parametro en la url el status"
+    },
+    {
+      "name": "Crear movimiento detalle",
+      "url": "http://localhost:8080/movementdetails/register",
+      "method": "POST",
+      "description": "Endpoint para crear un nuevo movimiento detalle"
+    },
+    {
+      "name": "Obtener todos los movimiento detalle",
+      "url": "http://localhost:8080/movementdetails/getAll",
+      "method": "GET",
+      "description": "Endpoint para obtener la lista de movimientos detalles"
+    },
+    {
+      "name": "Actualizar movimiento detalle",
+      "url": "http://localhost:8080/movementdetails/update/{id}",
+      "method": "PATCH",
+      "description": "Endpoint para actualizar un movimiento detalle recibe como parametro en la url el id del movimiento a actualizar"
+    },
+    {
+      "name": "Eliminar movimiento detalle",
+      "url": "http://localhost:8080/movementdetails/delete/{id}",
+      "method": "DELETE",
+      "description": "Endpoint para eliminar un movimiento detalle recibe como parametro en la url el id del movimiento a eliminar"
+    },
+    {
+      "name": "Buscar movimiento detalle por id",
+      "url": "http://localhost:8080/movementdetails/getById//{id}",
+      "method": "GET",
+      "description": "Endpoint para buscar un movimiento detalle  recibe como parametro en la url el id del movimiento a buscar"
+    },
+    {
+      "name": "Buscar movimientos detalle por estado",
+      "url": "http://localhost:8080/movementdetails/getByStatus/{status}",
+      "method": "GET",
+      "description": "Endpoint para buscar los movimientos detalle recibe como parametro en la url el status"
+    },
+    {
+      "name": "Buscar  respuesta movimientos detalle por estado",
+      "url": "http://localhost:8080/movementdetails/getResponseByStatus/{status}",
+      "method": "GET",
+      "description": "Endpoint para buscar los movimientos detalle recibe como parametro en la url el status"
+    },
+    {
+      "name": "Buscar movimientos detalle por id del movimiento",
+      "url": "http://localhost:8080/movementdetails/getByMovementId/{movementId}",
+      "method": "GET",
+      "description": "Endpoint para buscar los movimientos detalle recibe como parametro en la url el id del movimiento"
+    }
+  ],
+  "tests": [
+    {
+      "name": "Prueba de crear movimientos",
+      "request": {
+        "url": "http://localhost:8080/movements/registerMovement",
+        "method": "POST"
+      },
+      "expectedResponse": {
+        "status": 201,
+        "body": {
+          "companyId": 3,
+          "description": "Movimiento 5",
+          "wineryOriginCode": "ORIGIN05",
+          "wineryDestinationCode": "DEST05",
+          "creationDate": "2023-08-05"
+        }
+      }
+    },
+    {
+      "name": "Prueba de crear movimientos con lista de detalles",
+      "request": {
+        "url": "http://localhost:8080/movements/registerWithDetails",
+        "method": "POST"
+      },
+      "expectedResponse": {
+        "status": 201,
+        "body": {
+          "companyId": 3,
+          "description": "Movimiento 5",
+          "wineryOriginCode": "ORIGIN05",
+          "wineryDestinationCode": "DEST05",
+          "creationDate": "2023-08-05",
+          "movementDetailDtoList":[
+            {
+
+              "itemCode": "123c",
+              "quantitySent": 10
+            },
+            {
+
+              "itemCode": "128c",
+              "quantitySent": 10
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "Obtener todos los movimiento",
+      "request": {
+        "url": "http://localhost:8080/movements/getAll",
+        "method": "GET"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Actualizar movimiento",
+      "request": {
+        "url": "http://localhost:8080/movements/update/{id}",
+        "method": "PATCH"
+      },
+      "expectedResponse": {
+        "status": 201,
+        "body": {
+          "companyId": 1,
+          "description": "description",
+          "wineryOriginCode": "112",
+          "wineryDestinationCode": "112",
+          "creationDate": "2023-03-25",
+          "deliveryDate": "2023-07-25",
+          "status": "E"
+        }
+      }
+    },
+    {
+      "name": "Eliminar movimiento",
+      "request": {
+        "url": "http://localhost:8080/movements/delete/{id}",
+        "method": "DELETE"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Buscar movimiento por id",
+      "request": {
+        "url": "http://localhost:8080/movements/getById/{id}",
+        "method": "GET"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Buscar movimientos por estado",
+      "request": {
+        "url": "http://localhost:8080/movements/getByStatus/{status}",
+        "method": "GET"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Crear movimiento detalle",
+      "request": {
+        "url": "http://localhost:8080/movementdetails/register",
+        "method": "POST"
+      },
+      "expectedResponse": {
+        "status": 201,
+        "body": {
+          "movementId": 1,
+          "itemCode": "123c",
+          "quantitySent": 10
+        }
+      }
+    },
+    {
+      "name": "Obtener todos los movimiento detalle",
+      "request": {
+        "url": "http://localhost:8080/movementdetails/getAll",
+        "method": "GET"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Actualizar movimiento detalle",
+      "request": {
+        "url": "http://localhost:8080/movementdetails/update/{id}",
+        "method": "PATCH"
+      },
+      "expectedResponse": {
+        "status": 201,
+        "body": {
+          "movementId": 1,
+          "itemCode": "123c",
+          "quantitySent": 100
+        }
+      }
+    },
+    {
+      "name": "Eliminar movimiento detalle",
+      "request": {
+        "url": "http://localhost:8080/movementdetails/delete/{id}",
+        "method": "DELETE"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Buscar movimiento detalle por id",
+      "request": {
+        "url": "http://localhost:8080/movementdetails/getById/{id}",
+        "method": "GET"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Buscar movimientos detalle por estado",
+      "request": {
+        "url": "http://localhost:8080/movementdetails/getByStatus/{status}",
+        "method": "GET"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Buscar  respuesta movimientos detalle por estado",
+      "request": {
+        "url": "http://localhost:8080/movementdetails/getResponseByStatus/{status}",
+        "method": "GET"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    },
+    {
+      "name": "Buscar movimientos detalle por id del movimiento",
+
+      "request": {
+        "url": "http://localhost:8080/movementdetails/getByMovementId/{movementId}",
+        "method": "GET"
+      },
+      "expectedResponse": {
+        "status": 201
+      }
+    }
+  ]
+}
