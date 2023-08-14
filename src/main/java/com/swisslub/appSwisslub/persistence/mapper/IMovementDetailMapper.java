@@ -1,6 +1,7 @@
 package com.swisslub.appSwisslub.persistence.mapper;
 
 import com.swisslub.appSwisslub.domain.dto.MovementDetailDto;
+import com.swisslub.appSwisslub.domain.dto.ResponseMovementDetailDto;
 import com.swisslub.appSwisslub.persistence.entity.MovementDetailEntity;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -18,4 +19,14 @@ public interface IMovementDetailMapper {
     MovementDetailEntity toMovementDetailEntity(MovementDetailDto movementDto);
 
     List<MovementDetailDto> toMovementDetailsDto(List<MovementDetailEntity> movementDetailsEntity);
+
+    @Mappings({
+            @Mapping(source = "movementEntity.id", target = "movementId"),
+            @Mapping(source = "movementEntity.companyId", target = "companyId"),
+            @Mapping(source = "movementEntity.wineryOriginCode", target = "wineryOriginCode"),
+            @Mapping(source = "movementEntity.wineryDestinationCode", target = "wineryDestinationCode")}
+
+    )
+    ResponseMovementDetailDto toResponseMovementDetailDto(MovementDetailEntity movementDetailEntity);
+    List<ResponseMovementDetailDto> toResponseMovementDetailDtoList(List<MovementDetailEntity> movementDetailsEntity);
 }

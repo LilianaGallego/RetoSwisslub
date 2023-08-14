@@ -2,6 +2,7 @@ package com.swisslub.appSwisslub.domain.service;
 
 import com.swisslub.appSwisslub.domain.dto.MovementDetailDto;
 import com.swisslub.appSwisslub.domain.dto.ResponseMessageDto;
+import com.swisslub.appSwisslub.domain.dto.ResponseMovementDetailDto;
 import com.swisslub.appSwisslub.domain.repository.IMovementDetailRepository;
 import com.swisslub.appSwisslub.domain.usecase.IMovementDetailUseCase;
 import com.swisslub.appSwisslub.enums.StatusEnum;
@@ -74,5 +75,10 @@ public class MovementDetailService implements IMovementDetailUseCase {
     @Override
     public List<MovementDetailDto> getMovementDetailsByMovementId(Long id) {
         return iMovementDetailRepository.getByMovementId(id);
+    }
+
+    @Override
+    public List<ResponseMovementDetailDto> getResponseMovementDetailsByStatus(StatusEnum status) {
+        return iMovementDetailRepository.getResponseByStatus(status);
     }
 }

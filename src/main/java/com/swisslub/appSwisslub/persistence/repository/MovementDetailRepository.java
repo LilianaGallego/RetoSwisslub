@@ -1,6 +1,7 @@
 package com.swisslub.appSwisslub.persistence.repository;
 
 import com.swisslub.appSwisslub.domain.dto.MovementDetailDto;
+import com.swisslub.appSwisslub.domain.dto.ResponseMovementDetailDto;
 import com.swisslub.appSwisslub.domain.repository.IMovementDetailRepository;
 import com.swisslub.appSwisslub.enums.StatusEnum;
 import com.swisslub.appSwisslub.persistence.crud.IMovementDetailCrudRepository;
@@ -37,6 +38,12 @@ public class MovementDetailRepository implements IMovementDetailRepository {
     @Override
     public List<MovementDetailDto> getByStatus(StatusEnum status) {
         return iMovementDetailMapper.toMovementDetailsDto(iMovementDetailCrudRepository
+                .findByMovementEntityStatus(status.toString()));
+    }
+
+    @Override
+    public List<ResponseMovementDetailDto> getResponseByStatus(StatusEnum status) {
+        return iMovementDetailMapper.toResponseMovementDetailDtoList(iMovementDetailCrudRepository
                 .findByMovementEntityStatus(status.toString()));
     }
 
