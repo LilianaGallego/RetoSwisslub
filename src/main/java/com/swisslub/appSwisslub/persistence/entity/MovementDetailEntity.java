@@ -15,6 +15,7 @@ public class MovementDetailEntity {
     @ManyToOne
     @JoinColumn(name = "movement_id")
     private MovementEntity movementEntity;
+    @Column(length = 20)
     private String itemCode;
     private int quantitySent;
 }
